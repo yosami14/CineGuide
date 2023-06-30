@@ -1,0 +1,73 @@
+:root {
+  /* --clr-primary: #dedde2; */
+  --clr-primary: #ffff;
+  --clr-primary-light: #f2f2f2;
+  --clr-grey-1: #0d0d0d;
+  --clr-grey-5: #bdbbbe;
+  --clr-grey-10: #f1f5f8;
+  --ff-primary: "Space Grotesk", sans-serif;
+  --ff-secondary: "Grand Hotel", cursive;
+  --transition: all 0.3s linear;
+  --spacing: 0.15rem;
+  --radius: 0.5rem;
+  --container-padding: 2% 5% 5%;
+}
+
+body {
+  font-family: var(--ff-primary);
+  color: var(--clr--grey-1);
+  line-height: 1.5;
+  font-size: 0.875rem;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: var(--spacing);
+  text-transform: capitalize;
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+  color: var(--clr-grey-10);
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+h1 {
+  font-size: 4.5rem;
+  font-weight: bolder;
+}
+
+h2 {
+  font-size: 4rem;
+  font-weight: bolder;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 0.875rem;
+}
+
+p {
+  text-transform: capitalize;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  color: var(--clr-grey-10);
+}
+
+/* banner */
+#banner img {
+  height: 80vh;
+  object-fit: fill;
+}

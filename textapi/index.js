@@ -11,18 +11,12 @@ fetch('https://api.themoviedb.org/3/trending/all/day?language=en-US', options)
   .then(response => topCine(response))
   .catch(err => console.error(err));
 
-
-  const topCine = (data) =>{
-  // let bannerMain = $('#bannerMain');
-  //carousel Holder
+const topCine = (data) => {
   let carouselExampleDark = $('#carouselExampleDark');
   carouselExampleDark.addClass('carousel carousel-dark slide');
 
-  // var carouselIndicators = $('.carousel-indicators')
-  // let carouselInner = $('.carousel-inner');
-
-  for (const eachtopCine of data) {
-    let index = data.indexOf(eachtopCine);
+  for (const eachtopCine of data.results) {
+    let index = data.results.indexOf(eachtopCine);
     let indexActive = '';
 
     if (index === 0) {
@@ -34,37 +28,35 @@ fetch('https://api.themoviedb.org/3/trending/all/day?language=en-US', options)
       .attr('data-bs-target', '#carouselExampleDark')
       .attr('data-bs-slide-to', index)
       .addClass(indexActive)
-      .attr('aria-current', index === 0);
-      // .attr('aria-label', 'Slide ' + (index + 1));
+      .attr('aria-current', index === 0)
+      .attr('aria-label', `Slide ${index + 1}`);
 
-    // Add the indicator to the carousel indicators container
     $('.carousel-indicators').append(indicator);
 
-
-//carousel-inner
-let carouselItem = $('<div>') 
-    carouselItem
-    .attr("data-bs-interval",'10000')
-    .classAdd('carousel-item')
-    if(index == 0){
-      carouselItem.classAdd(' active')
+    let carouselItem = $('<div>').addClass('carousel-item');
+    if (index === 0) {
+      carouselItem.addClass('active');
     }
-    $('.carousel-inner').append(carouselItem)
-    //carousel img
-    let carousel_img = $('img') 
-    carousel_img
-    .attr('src',`http://image.tmdb.org/t/p/w500 ${eachtopCine.results.backdrop_path}`)
-    .attr('alt',`Image of${eachtopCine.results.name}`)
-    .classAdd('d-block w-100')
-    
-    //carousel-caption
-    let carouselCaption = $('div')
-    .addClass('d-none d-md-block text-start')
-    let h5Caption = $('<h5>').text(eachtopCine.results.name);
-    let pCaption = $('<p>').text(eachtopCine.results.overview);
-    carouselCaption.append(h5Caption, pCaption);
-    carouselItem.append(carousel_img,carouselCaption)
-    $('carousel-inner').append(carouselItem)
-  }
+    carouselItem.attr('data-bs-interval', 3000); // Changed from 1000 to 3000
 
+    $('.carousel-inner').append(carouselItem);
+
+    let carouselImg = $('<img>')
+      .attr('src', `http://image.tmdb.org/t/p/w500${eachtopCine.backdrop_path}`)
+      .attr('alt', `Image of ${eachtopCine.name}`)
+      .addClass('d-block w-100');
+
+    let carouselCaption = $('<div>').addClass('carousel-caption d-none d-md-block text-start col col-lg-4');
+    let h5Caption
+if(eachtopCine.name){
+      h5Caption = $('<h1>').text(`${eachtopCine.name}`);
 }
+else{
+  h5Caption = $('<h1>').text(`${eachtopCine.title}`)
+}
+    let pCaption = $('<h4>').text(eachtopCine.overview);
+    carouselCaption.append(h5Caption, pCaption);
+
+    carouselItem.append(carouselImg, carouselCaption);
+  }
+};

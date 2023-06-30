@@ -6,10 +6,27 @@ const options = {
   }
 };
 
-fetch('https://api.themoviedb.org/3/trending/all/day?language=en-US', options)
-  .then(response => response.json())
-  .then(response => topCine(response))
+// Function to fetch data from a URL and parse the response as JSON
+const fetchData = url => {
+  return fetch(url, options)
+    .then(response => response.json());
+};
+
+// Fetch both URLs simultaneously
+Promise.all([
+  fetchData('https://api.themoviedb.org/3/trending/all/day?language=en-US'),
+  fetchData('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc')
+])
+  .then(responses => {
+    const topCineResponse = responses[0];
+    const moviesResponse = responses[1];
+
+    // Process the responses separately
+    topCine(topCineResponse);
+    movies(moviesResponse);
+  })
   .catch(err => console.error(err));
+
 
 const topCine = (data) => {
   let carouselExampleDark = $('#carouselExampleDark');
@@ -46,17 +63,45 @@ const topCine = (data) => {
       .attr('alt', `Image of ${eachtopCine.name}`)
       .addClass('d-block w-100');
 
-    let carouselCaption = $('<div>').addClass('carousel-caption d-none d-md-block text-start');
+    let carouselCaption = $('<div>').addClass('carousel-caption d-none d-md-block text-start col col-lg-4');
     let h5Caption
 if(eachtopCine.name){
-      h5Caption = $('<h5>').text(`${eachtopCine.name}`);
+      h5Caption = $('<h1>').text(`${eachtopCine.name}`);
 }
 else{
-  h5Caption = $('<h5>').text(`${eachtopCine.title}`)
+  h5Caption = $('<h1>').text(`${eachtopCine.title}`)
 }
-    let pCaption = $('<p>').text(eachtopCine.overview);
+    let pCaption = $('<h4>').text(eachtopCine.overview);
     carouselCaption.append(h5Caption, pCaption);
 
     carouselItem.append(carouselImg, carouselCaption);
   }
 };
+
+// movies
+const movies = (data) =>{
+  
+  for(const eachMovie of data.results){
+  //card
+
+    let card = $('div')
+    .addClass('card')
+
+  //img for card
+    let img = $('<img>')
+    .attr('src',`http://image.tmdb.org/t/p/w500${eachMovie.backdrop_path}`)
+    .addClass('card-img-top')
+    .attr('alt',`Image of ${eachMovie.name}`)
+    }
+  //card-body
+  let cardBody = $('div')
+  .addClass('card-body')
+   //card-body texts
+      let cardTitle = $('card-title')
+      .addClass('card-title')
+      .text(eachMovie.title)
+      .html('<i class="fa-solid fa-arrow-right"></i>')
+      cardBody.append(cardTitle)
+      card.append(img,cardBody)
+      $('#movies').append(card)
+}
