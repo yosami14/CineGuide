@@ -1,4 +1,3 @@
-
 const options = {
   method: 'GET',
   headers: {
@@ -7,13 +6,11 @@ const options = {
   }
 };
 
-// Function to fetch data from a URL and parse the response as JSON
 const fetchData = url => {
   return fetch(url, options)
     .then(response => response.json());
 };
 
-// Fetch both URLs simultaneously
 Promise.all([
   fetchData('https://api.themoviedb.org/3/trending/all/day?language=en-US'),
   fetchData('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc'),
@@ -28,7 +25,6 @@ Promise.all([
     const upComingResponse = responses[3];
     const topRatedResponse = responses[4];
 
-    // Process the responses separately
     topCine(topCineResponse);
     movies(moviesResponse);
     tv(tvResponse);
@@ -64,7 +60,7 @@ const topCine = (data) => {
     if (index === 0) {
       carouselItem.addClass('active');
     }
-    carouselItem.attr('data-bs-interval', 3000); // Changed from 1000 to 3000
+    carouselItem.attr('data-bs-interval', 3000);
 
     $('.carousel-inner').append(carouselItem);
 
@@ -74,7 +70,7 @@ const topCine = (data) => {
 
     if ($(window).width() > 600) {
       carouselImg.attr('src', `http://image.tmdb.org/t/p/w500${eachtopCine.backdrop_path}`);
-    } else if($(window).width() < 600)  {
+    } else if ($(window).width() < 600) {
       carouselImg.attr('src', `http://image.tmdb.org/t/p/w500${eachtopCine.poster_path}`);
     }
 
@@ -94,148 +90,90 @@ const topCine = (data) => {
   }
 };
 
-
-// movies
 const movies = (data) => {
   for (const eachMovie of data.results) {
-    // Create card element
-    let card = $('<div>')
-    .addClass('card');
-
-    // Create img element for card
+    let card = $('<div>').addClass('card');
     let img = $('<img>')
-      .attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.backdrop_path}`)
       .addClass('card-img-top')
       .attr('alt', `Image of ${eachMovie.name}`);
-    // Create card-body element
-    let cardBody = $('<div>')
-    .addClass('card-body');
-    
-    
-
-    // Create card-title element
-    let cardTitle = $('<h5>')
-      .addClass('card-title')
-      .text(eachMovie.title);
       
-    // Append elements to card-body
+    if ($(window).width() > 600) {
+      img.attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.backdrop_path}`);
+    } else if ($(window).width() < 600) {
+      img.attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.poster_path}`);
+    }
+
+    let cardBody = $('<div>').addClass('card-body');
+    let cardTitle = $('<h5>').addClass('card-title').text(eachMovie.title);
+      
     cardBody.append(cardTitle);
-
-    // Append elements to card
     card.append(img, cardBody);
-
-    // Append card to the movies section
     $('.movieGroup').append(card);
-    
-
-    
-
-
-
   }
 };
 
-//tv
-const tv = (data) =>{
-    for (const eachMovie of data.results) {
-    // Create card element
-    let card = $('<div>')
-    .addClass('card');
-
-    // Create img element for card
+const tv = (data) => {
+  for (const eachMovie of data.results) {
+    let card = $('<div>').addClass('card');
     let img = $('<img>')
-      .attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.backdrop_path}`)
       .addClass('card-img-top')
       .attr('alt', `Image of ${eachMovie.name}`);
-    // Create card-body element
-    let cardBody = $('<div>')
-    .addClass('card-body');
-    
-    
 
-    // Create card-title element
-    let cardTitle = $('<h5>')
-      .addClass('card-title')
-      .text(eachMovie.name);
-      
-    // Append elements to card-body
+    if ($(window).width() > 600) {
+      img.attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.backdrop_path}`);
+    } else if ($(window).width() < 600) {
+      img.attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.poster_path}`);
+    }
+
+    let cardBody = $('<div>').addClass('card-body');
+    let cardTitle = $('<h5>').addClass('card-title').text(eachMovie.name);
+
     cardBody.append(cardTitle);
-
-    // Append elements to card
     card.append(img, cardBody);
-
-    // Append card to the movies section
     $('.tvGroup').append(card);
   }
+};
 
-}
-
-
-//upcoming
-const upComing = (data) =>{
-    for (const eachMovie of data.results) {
-    // Create card element
-    let card = $('<div>')
-    .addClass('card');
-
-    // Create img element for card
+const upComing = (data) => {
+  for (const eachMovie of data.results) {
+    let card = $('<div>').addClass('card');
     let img = $('<img>')
-      .attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.backdrop_path}`)
       .addClass('card-img-top')
       .attr('alt', `Image of ${eachMovie.name}`);
-    // Create card-body element
-    let cardBody = $('<div>')
-    .addClass('card-body');
-    
-    
 
-    // Create card-title element
-    let cardTitle = $('<h5>')
-      .addClass('card-title')
-      .text(eachMovie.title);
-      
-    // Append elements to card-body
+    if ($(window).width() > 600) {
+      img.attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.backdrop_path}`);
+    } else if ($(window).width() < 600) {
+      img.attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.poster_path}`);
+    }
+
+    let cardBody = $('<div>').addClass('card-body');
+    let cardTitle = $('<h5>').addClass('card-title').text(eachMovie.title);
+
     cardBody.append(cardTitle);
-
-    // Append elements to card
     card.append(img, cardBody);
-
-    // Append card to the movies section
     $('.upComingGroup').append(card);
   }
+};
 
-}
-
-const topRated = (data)=>{
-      for (const eachMovie of data.results) {
-    // Create card element
-    let card = $('<div>')
-    .addClass('card');
-
-    // Create img element for card
+const topRated = (data) => {
+  for (const eachMovie of data.results) {
+    let card = $('<div>').addClass('card');
     let img = $('<img>')
-      .attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.backdrop_path}`)
       .addClass('card-img-top')
       .attr('alt', `Image of ${eachMovie.name}`);
-    // Create card-body element
-    let cardBody = $('<div>')
-    .addClass('card-body');
-    
-    
 
-    // Create card-title element
-    let cardTitle = $('<h5>')
-      .addClass('card-title')
-      .text(eachMovie.title);
-      
-    // Append elements to card-body
+    if ($(window).width() > 600) {
+      img.attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.backdrop_path}`);
+    } else if ($(window).width() < 600) {
+      img.attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.poster_path}`);
+    }
+
+    let cardBody = $('<div>').addClass('card-body');
+    let cardTitle = $('<h5>').addClass('card-title').text(eachMovie.title);
+
     cardBody.append(cardTitle);
-
-    // Append elements to card
     card.append(img, cardBody);
-
-    // Append card to the movies section
     $('.topRatedGroup').append(card);
   }
-
 }
