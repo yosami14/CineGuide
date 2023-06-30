@@ -68,6 +68,9 @@ p {
   color: var(--clr-grey-10);
 }
 
+body {
+  background: #111111;
+}
 /* banner */
 
 .carousel-control-prev,
@@ -84,7 +87,6 @@ p {
 
 /* movie/ tv*/
 section {
-  background: #111111;
   color: var(--clr-grey-10);
 }
 
