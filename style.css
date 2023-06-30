@@ -72,20 +72,28 @@ p {
   object-fit: fill;
 }
 
-/* movie */
-#movies {
+/* movie/ tv*/
+section {
   background: #111111;
   color: var(--clr-grey-10);
 }
 
 .card-group {
+  overflow-x: auto;
+
   display: flex;
+  flex-wrap: nowrap; /* Prevent flex items from wrapping to a new line */
+  flex-wrap: nowrap;
+  padding-bottom: 20px;
+}
+.card-group::-webkit-scrollbar {
+  color: transparent; /* Hide scrollbar in Webkit (Chrome, Safari, etc.) */
 }
 .card {
   box-sizing: border-box;
   background-color: transparent;
   border: none;
-  min-width: 20%;
+  min-width: 20%; /* Set a fixed width for each card */
   padding: 1% 2% 1%;
 }
 .card-group img {
