@@ -1,3 +1,4 @@
+
 const options = {
   method: 'GET',
   headers: {
@@ -68,24 +69,31 @@ const topCine = (data) => {
     $('.carousel-inner').append(carouselItem);
 
     let carouselImg = $('<img>')
-      .attr('src', `http://image.tmdb.org/t/p/w500${eachtopCine.backdrop_path}`)
       .attr('alt', `Image of ${eachtopCine.name}`)
       .addClass('d-block w-100');
 
+    if ($(window).width() > 600) {
+      carouselImg.attr('src', `http://image.tmdb.org/t/p/w500${eachtopCine.backdrop_path}`);
+    } else if($(window).width() < 600)  {
+      carouselImg.attr('src', `http://image.tmdb.org/t/p/w500${eachtopCine.poster_path}`);
+    }
+
     let carouselCaption = $('<div>').addClass('carousel-caption d-none d-md-block text-start col col-lg-4');
-    let h5Caption
-if(eachtopCine.name){
+    let h5Caption;
+
+    if (eachtopCine.name) {
       h5Caption = $('<h1>').text(`${eachtopCine.name}`);
-}
-else{
-  h5Caption = $('<h1>').text(`${eachtopCine.title}`)
-}
+    } else {
+      h5Caption = $('<h1>').text(`${eachtopCine.title}`);
+    }
+
     let pCaption = $('<h4>').text(eachtopCine.overview);
     carouselCaption.append(h5Caption, pCaption);
 
     carouselItem.append(carouselImg, carouselCaption);
   }
 };
+
 
 // movies
 const movies = (data) => {
