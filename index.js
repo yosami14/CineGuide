@@ -16,17 +16,23 @@ const fetchData = url => {
 Promise.all([
   fetchData('https://api.themoviedb.org/3/trending/all/day?language=en-US'),
   fetchData('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc'),
-  fetchData('https://api.themoviedb.org/3/discover/tv?include_adult=true&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc')
+  fetchData('https://api.themoviedb.org/3/discover/tv?include_adult=true&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc'),
+  fetchData('https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1'),
+  fetchData('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1')
 ])
   .then(responses => {
     const topCineResponse = responses[0];
     const moviesResponse = responses[1];
     const tvResponse = responses[2];
+    const upComingResponse = responses[3];
+    const topRatedResponse = responses[4];
 
     // Process the responses separately
     topCine(topCineResponse);
     movies(moviesResponse);
     tv(tvResponse);
+    upComing(upComingResponse);
+    topRated(topRatedResponse)
   })
   .catch(err => console.error(err));
 
@@ -152,6 +158,76 @@ const tv = (data) =>{
 
     // Append card to the movies section
     $('.tvGroup').append(card);
+  }
+
+}
+
+
+//upcoming
+const upComing = (data) =>{
+    for (const eachMovie of data.results) {
+    // Create card element
+    let card = $('<div>')
+    .addClass('card');
+
+    // Create img element for card
+    let img = $('<img>')
+      .attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.backdrop_path}`)
+      .addClass('card-img-top')
+      .attr('alt', `Image of ${eachMovie.name}`);
+    // Create card-body element
+    let cardBody = $('<div>')
+    .addClass('card-body');
+    
+    
+
+    // Create card-title element
+    let cardTitle = $('<h5>')
+      .addClass('card-title')
+      .text(eachMovie.title);
+      
+    // Append elements to card-body
+    cardBody.append(cardTitle);
+
+    // Append elements to card
+    card.append(img, cardBody);
+
+    // Append card to the movies section
+    $('.upComingGroup').append(card);
+  }
+
+}
+
+const topRated = (data)=>{
+      for (const eachMovie of data.results) {
+    // Create card element
+    let card = $('<div>')
+    .addClass('card');
+
+    // Create img element for card
+    let img = $('<img>')
+      .attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.backdrop_path}`)
+      .addClass('card-img-top')
+      .attr('alt', `Image of ${eachMovie.name}`);
+    // Create card-body element
+    let cardBody = $('<div>')
+    .addClass('card-body');
+    
+    
+
+    // Create card-title element
+    let cardTitle = $('<h5>')
+      .addClass('card-title')
+      .text(eachMovie.title);
+      
+    // Append elements to card-body
+    cardBody.append(cardTitle);
+
+    // Append elements to card
+    card.append(img, cardBody);
+
+    // Append card to the movies section
+    $('.topRatedGroup').append(card);
   }
 
 }

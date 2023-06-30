@@ -29,6 +29,7 @@ h4 {
   line-height: 1.25;
   margin-bottom: 0.75rem;
   color: var(--clr-grey-10);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 img {
@@ -42,7 +43,7 @@ a {
 }
 
 h1 {
-  font-size: 4.5rem;
+  font-size: 4rem;
   font-weight: bolder;
 }
 
@@ -53,6 +54,7 @@ h2 {
 
 h3 {
   font-size: 1.5rem;
+  text-shadow: #bdbbbe;
 }
 
 h4 {
@@ -67,6 +69,14 @@ p {
 }
 
 /* banner */
+
+.carousel-control-prev,
+.carousel-control-next {
+  height: 80vh;
+}
+#banner {
+  height: 80vh;
+}
 #banner img {
   height: 80vh;
   object-fit: fill;
@@ -80,14 +90,13 @@ section {
 
 .card-group {
   overflow-x: auto;
-
   display: flex;
   flex-wrap: nowrap; /* Prevent flex items from wrapping to a new line */
   flex-wrap: nowrap;
-  padding-bottom: 20px;
 }
 .card-group::-webkit-scrollbar {
-  color: transparent; /* Hide scrollbar in Webkit (Chrome, Safari, etc.) */
+  color: transparent;
+  font-size: 5px; /* Hide scrollbar in Webkit (Chrome, Safari, etc.) */
 }
 .card {
   box-sizing: border-box;
