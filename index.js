@@ -95,13 +95,9 @@ const movies = (data) => {
     let card = $('<div>').addClass('card');
     let img = $('<img>')
       .addClass('card-img-top')
-      .attr('alt', `Image of ${eachMovie.name}`);
-      
-    if ($(window).width() > 600) {
-      img.attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.backdrop_path}`);
-    } else if ($(window).width() < 600) {
-      img.attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.poster_path}`);
-    }
+      .attr('alt', `Image of ${eachMovie.name}`)
+      .attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.poster_path}`);
+
 
     let cardBody = $('<div>').addClass('card-body');
     let cardTitle = $('<h5>').addClass('card-title').text(eachMovie.title);
@@ -117,13 +113,8 @@ const tv = (data) => {
     let card = $('<div>').addClass('card');
     let img = $('<img>')
       .addClass('card-img-top')
-      .attr('alt', `Image of ${eachMovie.name}`);
-
-    if ($(window).width() > 600) {
-      img.attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.backdrop_path}`);
-    } else if ($(window).width() < 600) {
-      img.attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.poster_path}`);
-    }
+      .attr('alt', `Image of ${eachMovie.name}`)
+      .attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.poster_path}`);
 
     let cardBody = $('<div>').addClass('card-body');
     let cardTitle = $('<h5>').addClass('card-title').text(eachMovie.name);
@@ -139,13 +130,8 @@ const upComing = (data) => {
     let card = $('<div>').addClass('card');
     let img = $('<img>')
       .addClass('card-img-top')
-      .attr('alt', `Image of ${eachMovie.name}`);
-
-    if ($(window).width() > 600) {
-      img.attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.backdrop_path}`);
-    } else if ($(window).width() < 600) {
-      img.attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.poster_path}`);
-    }
+      .attr('alt', `Image of ${eachMovie.name}`)
+      .attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.poster_path}`);
 
     let cardBody = $('<div>').addClass('card-body');
     let cardTitle = $('<h5>').addClass('card-title').text(eachMovie.title);
@@ -161,13 +147,8 @@ const topRated = (data) => {
     let card = $('<div>').addClass('card');
     let img = $('<img>')
       .addClass('card-img-top')
-      .attr('alt', `Image of ${eachMovie.name}`);
-
-    if ($(window).width() > 600) {
-      img.attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.backdrop_path}`);
-    } else if ($(window).width() < 600) {
-      img.attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.poster_path}`);
-    }
+      .attr('alt', `Image of ${eachMovie.name}`)
+      .attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.poster_path}`);
 
     let cardBody = $('<div>').addClass('card-body');
     let cardTitle = $('<h5>').addClass('card-title').text(eachMovie.title);
