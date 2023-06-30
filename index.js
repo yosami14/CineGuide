@@ -79,29 +79,35 @@ else{
 };
 
 // movies
-const movies = (data) =>{
-  
-  for(const eachMovie of data.results){
-  //card
+const movies = (data) => {
+  for (const eachMovie of data.results) {
+    // Create card element
+    let card = $('<div>')
+    .addClass('card');
 
-    let card = $('div')
-    .addClass('card')
-
-  //img for card
+    // Create img element for card
     let img = $('<img>')
-    .attr('src',`http://image.tmdb.org/t/p/w500${eachMovie.backdrop_path}`)
-    .addClass('card-img-top')
-    .attr('alt',`Image of ${eachMovie.name}`)
-    }
-  //card-body
-  let cardBody = $('div')
-  .addClass('card-body')
-   //card-body texts
-      let cardTitle = $('card-title')
+      .attr('src', `http://image.tmdb.org/t/p/w500${eachMovie.backdrop_path}`)
+      .addClass('card-img-top')
+      .attr('alt', `Image of ${eachMovie.name}`);
+    // Create card-body element
+    let cardBody = $('<div>')
+    .addClass('card-body');
+    
+    
+
+    // Create card-title element
+    let cardTitle = $('<h5>')
       .addClass('card-title')
-      .text(eachMovie.title)
-      .html('<i class="fa-solid fa-arrow-right"></i>')
-      cardBody.append(cardTitle)
-      card.append(img,cardBody)
-      $('#movies').append(card)
-}
+      .text(eachMovie.title);
+      
+    // Append elements to card-body
+    cardBody.append(cardTitle);
+
+    // Append elements to card
+    card.append(img, cardBody);
+
+    // Append card to the movies section
+    $('.card-group').append(card);
+  }
+};

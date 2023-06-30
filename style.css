@@ -71,3 +71,23 @@ p {
   height: 80vh;
   object-fit: fill;
 }
+
+/* movie */
+#movies {
+  background: #111111;
+  color: var(--clr-grey-10);
+}
+
+.card-group {
+  display: flex;
+}
+.card {
+  box-sizing: border-box;
+  background-color: transparent;
+  border: none;
+  min-width: 20%;
+  padding: 1% 2% 1%;
+}
+.card-group img {
+  border-radius: 15px;
+}
